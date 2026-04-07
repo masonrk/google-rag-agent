@@ -2,9 +2,11 @@
   "name": "my-agent",
   "version": "1.0.0",
   "description": "",
-  "main": "agent.ts",
+  "main": "dist/agent.js",
   "scripts": {
-    "start": "sh -c 'NODE_NO_WARNINGS=1 npx adk api_server agent.ts --host 0.0.0.0 --port ${PORT:-8080} --log_level error'",
+    "build": "tsc",
+    "gcp-build": "npm run build",
+    "start": "sh -c 'NODE_NO_WARNINGS=1 npx adk api_server dist/agent.js --host 0.0.0.0 --port ${PORT:-8080} --log_level error --compile=false --bundle=false'",
     "agent": "NODE_NO_WARNINGS=1 npx adk run agent.ts --log_level error",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,10 +15,13 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@google/adk": "^0.6.1"
+    "@google/adk": "^0.6.1",
+    "dotenv": "^17.2.3",
+    "googleapis": "^157.0.0",
+    "typescript": "^6.0.2",
+    "zod": "^4.1.5"
   },
   "devDependencies": {
-    "@google/adk-devtools": "^0.6.1",
-    "typescript": "^6.0.2"
+    "@google/adk-devtools": "^0.6.1"
   }
 }
